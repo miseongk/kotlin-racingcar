@@ -7,7 +7,7 @@ class Results {
     fun addEachRoundResult(cars: Cars) {
         val carsResult: MutableList<Car> = mutableListOf()
         for (car in cars.values) {
-            val result = Car(car.name, car.position)
+            val result = Car(car.name.value, car.position)
             carsResult.add(result)
         }
         rounds.add(Round(carsResult.toList()))

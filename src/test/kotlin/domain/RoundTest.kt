@@ -13,8 +13,8 @@ class RoundTest {
         val winners = round.findWinners()
 
         assertAll(
-            { assertEquals("a", winners[0].name) },
-            { assertEquals("b", winners[1].name) }
+            { assertEquals("a", winners[0].name.value) },
+            { assertEquals("b", winners[1].name.value) }
         )
     }
 }

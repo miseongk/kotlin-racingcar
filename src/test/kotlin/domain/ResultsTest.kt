@@ -15,9 +15,9 @@ class ResultsTest {
 
         val history = results.getHistory()
         assertAll(
-            { assertEquals("a", history[0].cars[0].name) },
+            { assertEquals("a", history[0].cars[0].name.value) },
             { assertEquals(2, history[0].cars[0].position) },
-            { assertEquals("b", history[0].cars[1].name) },
+            { assertEquals("b", history[0].cars[1].name.value) },
             { assertEquals(1, history[0].cars[1].position) }
         )
     }
@@ -32,6 +32,6 @@ class ResultsTest {
         results.addEachRoundResult(second)
 
         val winners = results.findWinners()
-        assertEquals("a", winners[0].name)
+        assertEquals("a", winners[0].name.value)
     }
 }

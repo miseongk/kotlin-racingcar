@@ -15,9 +15,9 @@ class RacingCarGameTest {
 
         val winners = racingCarGame.getWinners()
         assertAll(
-            { assertEquals("a", winners[0].name) },
-            { assertEquals("b", winners[1].name) },
-            { assertEquals("c", winners[2].name) }
+            { assertEquals("a", winners[0].name.value) },
+            { assertEquals("b", winners[1].name.value) },
+            { assertEquals("c", winners[2].name.value) }
         )
     }
 }

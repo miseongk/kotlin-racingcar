@@ -14,13 +14,13 @@ object OutputView {
 
     private fun printResultEachRound(round: Round) {
         for (car in round.cars) {
-            println("${car.name} : ${"-".repeat(car.position)}")
+            println("${car.name.value} : ${"-".repeat(car.position)}")
         }
         println()
     }
 
     fun printWinnersName(winners: List<Car>) {
-        val winnersName = winners.joinToString(", ") { winner -> winner.name }
+        val winnersName = winners.joinToString(", ") { winner -> winner.name.value }
         println("${winnersName}(이)가 최종 우승했습니다.")
     }
 }

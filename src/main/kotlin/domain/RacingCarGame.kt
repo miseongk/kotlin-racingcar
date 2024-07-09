@@ -1,18 +1,20 @@
 package domain
 
 import domain.strategy.MoveStrategy
+import domain.vo.TryCount
 
 class RacingCarGame(
     cars: List<String>,
-    private val tryCount: Int,
+    tryCount: Int,
     private val moveStrategy: MoveStrategy
 ) {
 
+    private val tryCount: TryCount = TryCount(tryCount)
     private val cars: Cars = Cars.fromNames(cars)
     private val results: Results = Results()
 
     fun play() {
-        for (round in 0..tryCount) {
+        for (round in 0..tryCount.value) {
             cars.moveAll(moveStrategy)
             results.addEachRoundResult(cars)
         }
