@@ -9,14 +9,14 @@ class CarsTest {
 
     @Test
     fun 모든_자동차를_움직인다() {
-        val cars = Cars(listOf("a", "b", "c"))
+        val cars = Cars.fromCars(listOf(Car("a", 2), Car("b", 1), Car("c", 3)))
 
         cars.moveAll(TestMoveStrategy())
 
         assertAll(
-            { assertEquals(1, cars.values[0].position) },
-            { assertEquals(1, cars.values[1].position) },
-            { assertEquals(1, cars.values[2].position) },
+            { assertEquals(3, cars.values[0].position) },
+            { assertEquals(2, cars.values[1].position) },
+            { assertEquals(4, cars.values[2].position) },
         )
     }
 }

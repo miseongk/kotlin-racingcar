@@ -2,12 +2,17 @@ package domain
 
 import domain.strategy.MoveStrategy
 
-class Cars(names: List<String>) {
+class Cars private constructor(val values: List<Car>) {
 
-    val values: List<Car>
+    companion object {
 
-    init {
-        values = names.map { name -> Car(name) }
+        fun fromNames(names: List<String>): Cars {
+            return Cars(names.map { name -> Car(name) })
+        }
+
+        fun fromCars(cars: List<Car>): Cars {
+            return Cars(cars)
+        }
     }
 
     fun moveAll(moveStrategy: MoveStrategy) {
