@@ -12,7 +12,12 @@ class Results {
         }
         rounds.add(Round(carsResult.toList()))
     }
-    
+
+    fun findWinners(): List<Car> {
+        val finalResult = rounds[rounds.lastIndex]
+        return finalResult.findWinners()
+    }
+
     fun getHistory(): List<Round> {
         return rounds.toList()
     }

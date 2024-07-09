@@ -21,4 +21,17 @@ class ResultsTest {
             { assertEquals(1, history[0].cars[1].position) }
         )
     }
+
+    @Test
+    fun 마지막_라운드를_통해_우승자를_찾는다() {
+        val results = Results()
+
+        val first = Cars.fromCars(listOf(Car("a", 1), Car("b", 1), Car("c", 0)))
+        results.addEachRoundResult(first)
+        val second = Cars.fromCars(listOf(Car("a", 2), Car("b", 1), Car("c", 1)))
+        results.addEachRoundResult(second)
+
+        val winners = results.findWinners()
+        assertEquals("a", winners[0].name)
+    }
 }
