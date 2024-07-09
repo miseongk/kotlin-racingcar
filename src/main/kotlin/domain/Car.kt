@@ -19,4 +19,15 @@ class Car(
     fun move(moveStrategy: MoveStrategy) {
         position += moveStrategy.move()
     }
+
+    fun findForward(otherPosition: Int): Int {
+        if (this.position > otherPosition) {
+            return this.position
+        }
+        return otherPosition
+    }
+
+    fun isSamePosition(otherPosition: Int): Boolean {
+        return this.position == otherPosition
+    }
 }
