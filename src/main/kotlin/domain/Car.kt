@@ -1,6 +1,7 @@
 package domain
 
 import domain.strategy.MoveStrategy
+import kotlin.math.max
 
 private const val INIT_POSITION = 0
 private const val MAX_CAR_NAME_LENGTH = 5
@@ -21,10 +22,7 @@ class Car(
     }
 
     fun findForward(otherPosition: Int): Int {
-        if (this.position > otherPosition) {
-            return this.position
-        }
-        return otherPosition
+        return max(this.position, otherPosition)
     }
 
     fun isSamePosition(otherPosition: Int): Boolean {
