@@ -4,13 +4,7 @@ class Round(val cars: List<Car>) {
 
     fun findWinners(): List<Car> {
         val winnerPosition = findMaxPosition()
-        val winners: MutableList<Car> = mutableListOf()
-        for (car in cars) {
-            if (car.isSamePosition(winnerPosition)) {
-                winners.add(car)
-            }
-        }
-        return winners.toList()
+        return cars.filter { it.isSamePosition(winnerPosition) }
     }
 
     private fun findMaxPosition(): Int {
