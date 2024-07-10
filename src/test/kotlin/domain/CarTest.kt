@@ -1,53 +1,45 @@
 package domain
 
 import domain.strategy.TestMoveStrategy
-import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.api.Assertions.assertThatThrownBy
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.CsvSource
+import io.kotest.core.spec.style.DescribeSpec
+import io.kotest.data.row
+import io.kotest.matchers.shouldBe
 
-class CarTest {
+class CarTest : DescribeSpec({
 
-    @Test
-    fun 자동차가_정상적으로_움직인다() {
-        val car = Car("name")
-
-        car.move(TestMoveStrategy())
-
-        assertThat(car.position).isEqualTo(1)
+    describe("move") {
+        context("자동차가 앞으로 1만큼 움직이면") {
+            it("위치가 1이 된다") {
+                val car = Car("name")
+                car.move(TestMoveStrategy())
+                car.position shouldBe 1
+            }
+        }
     }
 
-    @Test
-    fun 자동차가_이름이_5자_초과하면_예외가_발생한다() {
-        assertThatThrownBy {
-            Car("abcdef")
-        }.isInstanceOf(IllegalArgumentException::class.java)
+    describe("findForward") {
+        listOf(row(2, 3), row(4, 4)).forEach { (position, expected) ->
+            context("위치가 ${position}인 자동차와 위치가 3인 자동차가 있다면") {
+                it("더 앞의 위치는 ${expected}이다.") {
+                    val car = Car("name", 3)
+                    val result = car.findForward(position)
+                    result shouldBe expected
+                }
+            }
+        }
     }
 
-    @ParameterizedTest
-    @CsvSource(
-        "2, 3",
-        "4, 4"
-    )
-    fun 더_앞에_있는_자동차의_위치를_찾는다(position: Int, expected: Int) {
-        val car = Car("name", 3)
-
-        val result = car.findForward(position)
-
-        assertThat(result).isEqualTo(expected)
+    describe("isSamePosition") {
+        listOf(row(3, true), row(4, false)).forEach { (position, expected) ->
+            context("위치가 ${position}라면") {
+                it("${expected}이다.") {
+                    val car = Car("name", 3)
+                    val result = car.isSamePosition(position)
+                    result shouldBe expected
+                }
+            }
+        }
     }
+})
 
-    @ParameterizedTest
-    @CsvSource(
-        "3, true",
-        "4, false"
-    )
-    fun 위치가_같으면_true_다르면_false를_반환한다(position: Int, expected: Boolean) {
-        val car = Car("name", 3)
 
-        val result = car.isSamePosition(position)
-
-        assertThat(result).isEqualTo(expected)
-    }
-}

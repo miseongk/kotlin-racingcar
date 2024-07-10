@@ -1,20 +1,17 @@
 package domain
 
-import org.junit.jupiter.api.Assertions.assertAll
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Test
+import io.kotest.assertions.assertSoftly
+import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.shouldBe
 
-class RoundTest {
+class RoundTest : StringSpec({
 
-    @Test
-    fun 우승자를_찾는다() {
+    "우승자를 찾는다" {
         val round = Round(listOf(Car("a", 2), Car("b", 2), Car("c", 1)))
-
         val winners = round.findWinners()
-
-        assertAll(
-            { assertEquals("a", winners[0].name.value) },
-            { assertEquals("b", winners[1].name.value) }
-        )
+        assertSoftly {
+            winners[0].name.value shouldBe "a"
+            winners[1].name.value shouldBe "b"
+        }
     }
-}
+})
